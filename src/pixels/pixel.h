@@ -1,16 +1,22 @@
 #include <pixels/defs.h>
 #include <pixels/status.h>
 #include <pixels/math.h>
-typedef unsigned char* PIXELS;
-typedef unsigned char* PIXEL;
-typedef unsigned char* COEFS;
-typedef int PIXELSIZE;
-typedef unsigned long LEN; 
-typedef char* MAP;
+typedef unsigned char* IMAGEDATA;
 
-PIXELS_API STATUS set_map(const MAP map);
+typedef int* PIXELS;
+typedef int* PIXEL;
+
+typedef int* COEFS;
+typedef int* COEF;
+
+typedef int X;
+typedef int Y;
+typedef int INDEX;
+
+typedef unsigned long LEN; 
+
 PIXELS_API STATUS copy_pixel(PIXEL src, PIXEL dest);
-PIXELS_API PIXELSIZE get_pixel_size();
+PIXELS_API PIXELS new_pixels(LEN width, LEN height);
 PIXELS_API STATUS scramble_pixels(PIXELS origin, PIXELS dest, LEN len, int a, int b);
 PIXELS_API STATUS rescramble_pixels(PIXELS origin, PIXELS dest, LEN len, int a, int b);
 PIXELS_API STATUS dct_pixels(PIXELS pixels, COEFS coefs);
