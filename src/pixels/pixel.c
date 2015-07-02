@@ -1,13 +1,13 @@
 #include <pixels/pixel.h>
 #include <string.h>
 PIXELS_API STATUS copy_pixel(PIXEL src, PIXEL dest, const MAP map){
-	PIXELSIZE size = pixel_size(map);
+	PIXELSIZE size = get_pixel_size(map);
 	for (int i = 0 ; i < size; i++) {
 		*(src+i) = *(dest+i);
 	}
 }
 
-PIXELS_API PIXELSIZE pixel_size(const MAP map){
+PIXELS_API PIXELSIZE get_pixel_size(const MAP map){
 	return strlen(map);
 }
 
@@ -15,7 +15,7 @@ PIXELS_API PIXELSIZE pixel_size(const MAP map){
 PIXELS_API STATUS scramble_pixels(PIXELS origin, PIXELS dest, const MAP map, LEN len, int a, int b){
 	PIXEL origin_marker = origin;
 	PIXEL dest_marker = dest;
-	PIXELSIZE size = pixel_size(map);
+	PIXELSIZE size = get_pixel_size(map);
 	for (int i = 0; i < len*len; i++) {
 		int x = i%len;
 		int y = i/len;
@@ -29,7 +29,7 @@ PIXELS_API STATUS scramble_pixels(PIXELS origin, PIXELS dest, const MAP map, LEN
 PIXELS_API STATUS rescramble_pixels(PIXELS origin, PIXELS dest, const MAP map, LEN len, int a, int b){
 	PIXEL origin_marker = origin;
 	PIXEL dest_marker = dest;
-	PIXELSIZE size = pixel_size(map);
+	PIXELSIZE size = get_pixel_size(map);
 	for (int i = 0; i < len*len; i++) {
 		int x = i%len;
 		int y = i/len;
@@ -39,3 +39,4 @@ PIXELS_API STATUS rescramble_pixels(PIXELS origin, PIXELS dest, const MAP map, L
 		copy_pixel(dest_marker+r_i*size, origin_marker+i*size, map);
 	}
 }
+
