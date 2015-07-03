@@ -7,3 +7,7 @@ install :
 	cd pixels && make install 
 	rm /usr/local/include/pixels.h
 	cp pixels.h /usr/local/include/
+test : 
+	gcc test.c -std=c99 -lpixels -o test
+	./test
+	rm test
