@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+const double PI = 3.1415926535898f;
+
 PIXELS_API STATUS copy_pixel(PIXEL src, PIXEL dest){
 	*src = *dest;
 }
@@ -42,8 +44,33 @@ PIXELS_API STATUS rescramble_pixels(PIXELS origin, PIXELS dest, LEN len, int a, 
 	}
 }
 
-PIXELS_API STATUS dct_pixels(PIXELS pixels, COEFS coefs){
+PIXELS_API COEFS ptoc(PIXELS pixels, LEN len){
+	PIXEL pixel = pixels;
+	COEFS coefs = new_coefs(len, len);
+	COEF coef = coefs;
+	for (INDEX i = 0; i < len*len; i++){
+		*coef = *pixel;
+		pixel++;
+		coef++;
+	}
+	return coefs;
 }
 
-PIXELS_API STATUS idct_pixels(COEFS coefs, PIXELS pixels){
+PIXELS_API STATUS dct_pixels(PIXELS pixels, COEFS coefs, LEN len){
+	LEN N = len*len;
+	COEFS tmps = ptoc(pixels, len);
+	COEF tmp = tmps;
+	COEF coef = coefs;
+	for (INDEX k = 0; k < N; k++){
+		*coef = 0.0f;
+		tmp = tmps;
+		for (INDEX n = 0; n < N; n ++){
+			*coef += *tmp*cos(PI*(0.5+n)*k/N);
+			tmp++;
+		}	
+		coef++;
+	}
+}
+
+PIXELS_API STATUS idct_pixels(COEFS coefs, PIXELS pixels, LEN len){
 }
