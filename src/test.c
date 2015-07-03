@@ -5,15 +5,18 @@ void print_mc(COEF c);
 void print_mp(PIXEL p);
 int main(){
 	PIXELS pixels = new_pixels(8, 8);
-	PIXEL pixel = pixels;
-	COEFS coefs = new_coefs(8, 8);
-	COEF coef = coefs;
-	print_mp(pixel);
+	print_mp(pixels);
 	printf("\n---------------------------------------------------------\n");
-	print_mc(coef);
+	COEFS coefs = new_coefs(8, 8);
+	print_mc(coefs);
+	printf("\n---------------------------------------------------------\n");
+	dct_pixels(pixels, coefs, 8);
+	print_mc(coefs);
+
 }
 
-void print_mp(PIXEL p){
+void print_mp(PIXELS pixels){
+	PIXEL p = pixels;
 	for(int i =0 ; i < 8; i++){
 		for(int j =0 ; j < 8; j++){
 			printf("%d\t", *p);
@@ -23,7 +26,8 @@ void print_mp(PIXEL p){
 	}
 }
 
-void print_mc(COEF c){
+void print_mc(COEFS coefs){
+	COEF c = coefs;
 	for(int i =0 ; i < 8; i++){
 		for(int j =0 ; j < 8; j++){
 			printf("%f\t", *c);
