@@ -8,6 +8,6 @@ install :
 	rm /usr/local/include/pixels.h
 	cp pixels.h /usr/local/include/
 test : 
-	gcc test.c -std=c99 -lpixels -o test
+	gcc test.c -std=c99 -lpixels -lm -o test
 	./test
 	rm test
