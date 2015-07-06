@@ -3,8 +3,8 @@
 #include <pixels/math.h>
 typedef unsigned char* IMAGEDATA;
 
-typedef int* PIXELS;
-typedef int* PIXEL;
+typedef unsigned int* PIXELS;
+typedef unsigned int* PIXEL;
 
 typedef double* COEFS;
 typedef double* COEF;

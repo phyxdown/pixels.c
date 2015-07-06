@@ -49,9 +49,7 @@ PIXELS_API COEFS ptoc(PIXELS pixels, LEN len){
 	COEFS coefs = new_coefs(len, len);
 	COEF coef = coefs;
 	for (INDEX i = 0; i < len*len; i++){
-		*coef = *pixel;
-		pixel++;
-		coef++;
+		*(coef+i) = *(pixel+i);
 	}
 	return coefs;
 }
