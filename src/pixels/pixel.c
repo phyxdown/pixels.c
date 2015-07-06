@@ -10,13 +10,12 @@ PIXELS_API STATUS copy_pixel(PIXEL src, PIXEL dest){
 }
 
 PIXELS_API PIXELS new_pixels(LEN width, LEN height) {
-	return (PIXELS)calloc(width*height, sizeof(4));
+	return (PIXELS)calloc(width*height, sizeof(PIXELS));
 }
 
 PIXELS_API COEFS new_coefs(LEN width, LEN height) {
-	return (COEFS)calloc(width*height, sizeof(8));
+	return (COEFS)calloc(width*height, sizeof(COEFS));
 }
-
 
 PIXELS_API STATUS scramble_pixels(PIXELS origin, PIXELS dest, LEN len, int a, int b){
 	PIXEL origin_marker = origin;
