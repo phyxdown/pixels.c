@@ -6,6 +6,7 @@ typedef unsigned char* IMAGEDATA;
 typedef unsigned int* PIXELS;
 typedef unsigned int* PIXEL;
 
+typedef struct __pixels_coef pixels_coef_t;
 typedef double* COEFS;
 typedef double* COEF;
 
