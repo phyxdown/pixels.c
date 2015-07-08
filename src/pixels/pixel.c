@@ -3,13 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct __pixel_coef {
-	double A;
-	double R;
-	double G;
-	double B;
-};
-
 const double PI = 3.141592653589793238462643383279502884197169399375105820974944f;
 
 void print_mp(const PIXELS pixels, LEN len){
