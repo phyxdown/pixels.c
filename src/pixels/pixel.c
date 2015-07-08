@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const double PI = 3.1415926535898f;
+const double PI = 3.141592653589793238462643383279502884197169399375105820974944f;
 
 void print_mp(const PIXELS pixels, LEN len){
 	PIXEL p = &*pixels;
@@ -23,7 +23,7 @@ void print_mc(const COEFS coefs, LEN len){
 	COEF c = &*coefs;
 	for(int i =0 ; i < len; i++){
 		for(int j =0 ; j < len; j++){
-			printf("%f\t", *c);
+			printf("%8f ", *c);
 			c++;
 		}
 		printf("\n");
@@ -80,18 +80,44 @@ PIXELS_API COEFS ptoc(PIXELS pixels, LEN len){
 }
 
 PIXELS_API STATUS dct_pixels(PIXELS pixels, COEFS coefs, LEN len){
-	LEN N = len*len;
+//printf("PIXEL:\n");
+//print_mp(pixels, len);
+	COEFS c_pixels = ptoc(pixels, len);
+
+//printf("BEFORE DCT:\n");
+//print_mc(c_pixels, len);
+
+	/*LEN N = len*len;
 	COEF coef = coefs;
 	PIXEL pixel;
 	for (INDEX k = 0; k < N; k++){
 		pixel = pixels;
-		*coef = 0.0f;
+		*coef = 0;
 		for (INDEX n = 0; n < N; n ++){
-			*coef += *pixel*cos(PI*(0.5+n)*k/N);
+			*coef += *pixel*cos(PI*(0.5+n)*k/N)*2/N;
 			pixel++;
 		}	
 		coef++;
+	}*/
+	
+	LEN N = len*len;
+	COEF coef = coefs;
+	COEF pixel;
+	for (INDEX k = 0; k < N; k++){
+		pixel = c_pixels;
+		*coef = 0.0f;
+		for (INDEX n = 0; n < N; n ++){
+			//printf("%f += %f * cos(PI*(0.5+%d)*%d/%d)\n", *coef, *pixel, n, k, N);
+			*coef += *pixel*cos(PI*(0.5+n)*k/N);
+			pixel++;
+		}	
+		//printf("--------------\n");
+		*coef = *coef*2/N;
+		coef++;
 	}
+
+//printf("DCT RESULT:\n");
+//print_mc(coefs, len);
 }
 
 PIXELS_API STATUS idct_pixels(COEFS coefs, PIXELS pixels, LEN len){
@@ -101,23 +127,27 @@ PIXELS_API STATUS idct_pixels(COEFS coefs, PIXELS pixels, LEN len){
 	COEF coef;
 	for (INDEX k = 0; k < N; k++){
 		coef = coefs;
+		//printf("%f += 0.5*%f)\n", *tmp, *coef);
 		*tmp =  0.5*(*coef);
+		coef ++;
 		for (INDEX n = 1; n < N; n ++){
-			*tmp += *coef*cos(PI*(0.5+k)*n/N)*2/N;
+			//printf("%f += %f * cos(PI*(0.5+%d)*%d/%d)\n", *tmp, *coef, k, n, N);
+			*tmp += *coef*cos(PI*(0.5+k)*n/N);
 			coef++;
 		}	
+		//printf("--------------\n");
 		tmp++;
 	}
 
-	printf("IDCT RESULT:\n");
-	print_mc(tmps, len);
+//printf("IDCT RESULT:\n");
+//print_mc(tmps, len);
 	tmp = tmps;
 	PIXEL pixel = pixels;
 	for (INDEX i = 0; i < N; i ++){
 		*(pixel+i) = *(tmp+i);
+		//printf("%u, ", *(pixel+i));
 	}
 
-	printf("\n-----------------------------\n");
-	printf("IDCT PIXEL RESULT:\n");
-	print_mp(pixels, len);
+//printf("IDCT PIXEL RESULT:\n");
+//print_mp(pixels, len);
 }
