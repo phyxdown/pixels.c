@@ -26,6 +26,8 @@ typedef int INDEX;
 
 typedef unsigned long LEN; 
 
+PIXELS_API STATUS pixels_coefs_print(const COEFS coefs, LEN len);
+PIXELS_API STATUS pixels_coef_print(const COEF coef);
 PIXELS_API PIXELS new_pixels(LEN width, LEN height);
 PIXELS_API COEFS new_coefs(LEN width, LEN height);
 

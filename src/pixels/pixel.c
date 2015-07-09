@@ -6,7 +6,21 @@
 const double PI = 3.141592653589793238462643383279502884197169399375105820974944f;
 
 void print_mp(const PIXELS pixels, LEN len){ PIXEL p = &*pixels; for(int i =0 ; i < len; i++){ for(int j =0 ; j < len; j++){ unsigned char* bp = (unsigned char*)p; printf("(%d,%d,%d,%d) ", *bp, *(bp+1), *(bp+2), *(bp+3)); bp = NULL; p++; } printf("\n"); } p = NULL; } 
-void print_mc(const COEFS coefs, LEN len){ COEF c = &*coefs; for(int i =0 ; i < len; i++){ for(int j =0 ; j < len; j++){ printf("%8f ", *c); c++; } printf("\n"); } c = NULL; }
+
+PIXELS_API STATUS pixels_coefs_print(const COEFS coefs, LEN len){
+	COEF coef = coefs;
+	for (int i = 0; i < len; i++){
+		for (int j = 0; j < len; j++){
+			pixels_coef_print(coef);
+			coef++;
+		}
+		printf("\n");
+	}
+}
+
+PIXELS_API STATUS pixels_coef_print(const COEF coef){
+	printf("(%8f, %8f, %8f, %8f)\n", (*coef).R, (*coef).G, (*coef).B, (*coef).A);
+}
 
 PIXELS_API PIXELS new_pixels(LEN width, LEN height) {
 	return (PIXELS)calloc(width*height, sizeof(pixels_pixel_t));
