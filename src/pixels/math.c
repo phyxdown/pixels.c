@@ -1,5 +1,5 @@
 #include <pixels/math.h>
-REMAINDER mod(DIVIDEND dividend, DIVIDER divider) {
+int mod(long dividend, long divider) {
 	int ret = dividend % divider;
 	if (ret < 0){
 		return divider + ret;
@@ -8,3 +8,6 @@ REMAINDER mod(DIVIDEND dividend, DIVIDER divider) {
 	}
 }
 
+double round(double origin){
+	return floor(origin+0.5);
+}
