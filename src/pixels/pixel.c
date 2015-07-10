@@ -135,6 +135,7 @@ PIXELS_API STATUS pixels_insert88(IMAGEDATAS imagedatas){
 	IMAGEDATA _data = imagedatas;
 	C88 target = {{0.0}};
 	C88 dct = {{0.0}};
+	C88 idct = {{0.0}};
 
 	for (int k1 = 0; k1 < 8; k1++) {
 		for (int k2 = 0; k2 < 8; k2++) {
@@ -142,7 +143,16 @@ PIXELS_API STATUS pixels_insert88(IMAGEDATAS imagedatas){
 			_data++;
 		}
 	}
+	//PRINT
+//for (int k1 = 0; k1 < 8; k1++) {
+//	for (int k2 = 0; k2 < 8; k2++) {
+//		printf("%5.3f, ", target[k1][k2]);
+//	}
+//	printf("\n");
+//}
+
 	_data = NULL;
+	//DCT: target -> dct
 	for (int k1 = 0; k1 < 8; k1++) {
 		for (int k2 = 0; k2 < 8; k2++) {
 			dct[k1][k2] = 0.0;
@@ -154,10 +164,38 @@ PIXELS_API STATUS pixels_insert88(IMAGEDATAS imagedatas){
 			dct[k1][k2] = dct[k1][k2]*2/8;
 		}
 	}
+	//PRINT
+//for (int k1 = 0; k1 < 8; k1++) {
+//	for (int k2 = 0; k2 < 8; k2++) {
+//		printf("%5.3f, ", dct[k1][k2]);
+//	}
+//	printf("\n");
+//}
+	//insert
+	dct[4][4] = 1;
+	//IDCT: dct -> idct
 	for (int k1 = 0; k1 < 8; k1++) {
 		for (int k2 = 0; k2 < 8; k2++) {
-			printf("%f, ", dct[k1][k2]);
+			idct[k1][k2] = dct[0][0]/4;
+			for (int n1 = 1; n1 < 8; n1++) {
+				idct[k1][k2] += dct[n1][0]*cos(PI*(k1+0.5)*n1/8)/2;
+			}
+			for (int n2 = 1; n2 < 8; n2++) {
+				idct[k1][k2] += dct[0][n2]*cos(PI*(k2+0.5)*n2/8)/2;
+			}
+			for (int n1 = 1; n1 < 8; n1++) {
+				for (int n2 = 1; n2 < 8; n2++) {
+					idct[k1][k2] += dct[n1][n2]*cos(PI*(k2+0.5)*n2/8)*cos(PI*(k1+0.5)*n1/8);
+				}
+			}
+			idct[k1][k2] = idct[k1][k2]*2/8;
 		}
 	}
-
+	//PRINT
+//for (int k1 = 0; k1 < 8; k1++) {
+//	for (int k2 = 0; k2 < 8; k2++) {
+//		printf("%5.3f, ", idct[k1][k2]);
+//	}
+//	printf("\n");
+//}
 }
