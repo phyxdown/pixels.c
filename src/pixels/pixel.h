@@ -4,6 +4,8 @@
 #include <pixels/defs.h>
 #include <pixels/status.h>
 #include <pixels/math.h>
+typedef unsigned char pixels_byte_t;
+typedef unsigned char* IMAGEDATAS;
 typedef unsigned char* IMAGEDATA;
 
 typedef unsigned int pixels_pixel_t;
@@ -19,6 +21,7 @@ struct __pixels_coef {
 typedef struct __pixels_coef pixels_coef_t;
 typedef pixels_coef_t* COEFS;
 typedef pixels_coef_t* COEF;
+typedef double C88[8][8];
 
 typedef int X;
 typedef int Y;
@@ -28,6 +31,7 @@ typedef unsigned long LEN;
 
 PIXELS_API STATUS pixels_coefs_print(const COEFS coefs, LEN len);
 PIXELS_API STATUS pixels_coef_print(const COEF coef);
+PIXELS_API IMAGEDATAS new_imagedatas(LEN width, LEN height);
 PIXELS_API PIXELS new_pixels(LEN width, LEN height);
 PIXELS_API COEFS new_coefs(LEN width, LEN height);
 
@@ -40,4 +44,5 @@ PIXELS_API STATUS ctop(COEFS coefs, PIXELS pixels, LEN len);
 PIXELS_API STATUS dct_pixels(PIXELS pixels, COEFS coefs, LEN len);
 PIXELS_API STATUS idct_pixels(COEFS coefs, PIXELS pixels, LEN len);
 
+PIXELS_API STATUS pixels_insert88(IMAGEDATAS imagedatas);
 #endif
