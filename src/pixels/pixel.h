@@ -44,5 +44,6 @@ PIXELS_API STATUS ctop(COEFS coefs, PIXELS pixels, LEN len);
 PIXELS_API STATUS dct_pixels(PIXELS pixels, COEFS coefs, LEN len);
 PIXELS_API STATUS idct_pixels(COEFS coefs, PIXELS pixels, LEN len);
 
-PIXELS_API STATUS pixels_insert88(IMAGEDATAS imagedatas);
+PIXELS_API STATUS pixels_insert88(PIXELS pixels);
+PIXELS_API int pixels_extract88(IMAGEDATAS imagedatas);
 #endif
