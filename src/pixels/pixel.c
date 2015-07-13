@@ -176,7 +176,7 @@ PIXELS_API STATUS pixels_insert88(PIXELS pixels){
 //	printf("\n");
 //}
 	//insert
-	dct[5][3] = 5;
+	dct[5][5] = 5;
 	//IDCT: dct -> idct
 	for (int k1 = 0; k1 < 8; k1++) {
 		for (int k2 = 0; k2 < 8; k2++) {
@@ -208,7 +208,7 @@ PIXELS_API STATUS pixels_insert88(PIXELS pixels){
 			iidct[k1][k2] = iidct[k1][k2]*2/8;
 		}
 	}
-	printf("%f, ", iidct[5][3]);
+	printf("%f, ", iidct[5][5]);
 
 	//PRINT
 //for (int k1 = 0; k1 < 8; k1++) {
@@ -270,7 +270,7 @@ PIXELS_API int pixels_extract88(IMAGEDATAS imagedatas){
 //	printf("\n");
 //}
 	//insert
-	if( dct[5][3] > 4 && dct[5][3] < 6) {
+	if( dct[5][5] > 4 && dct[5][3] < 6) {
 		printf("#%f, ", dct[5][3]);
 		return 1;
 	}
