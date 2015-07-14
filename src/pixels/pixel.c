@@ -270,8 +270,8 @@ PIXELS_API int pixels_extract88(IMAGEDATAS imagedatas){
 //	printf("\n");
 //}
 	//insert
-	if( dct[5][5] > 4 && dct[5][3] < 6) {
-		printf("#%f, ", dct[5][3]);
+	if( dct[5][5] > 4 && dct[5][5] < 6) {
+		printf("#%f, ", dct[5][5]);
 		return 1;
 	}
 	else 
