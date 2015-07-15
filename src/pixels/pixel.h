@@ -29,8 +29,6 @@ typedef int INDEX;
 
 typedef unsigned long LEN; 
 
-PIXELS_API STATUS pixels_coefs_print(const COEFS coefs, LEN len);
-PIXELS_API STATUS pixels_coef_print(const COEF coef);
 PIXELS_API IMAGEDATAS new_imagedatas(LEN width, LEN height);
 PIXELS_API PIXELS new_pixels(LEN width, LEN height);
 PIXELS_API COEFS new_coefs(LEN width, LEN height);
@@ -40,9 +38,6 @@ PIXELS_API STATUS rescramble_pixels(PIXELS origin, PIXELS dest, LEN len, int a, 
 
 PIXELS_API STATUS ptoc(PIXELS pixels, COEFS coefs, LEN len);
 PIXELS_API STATUS ctop(COEFS coefs, PIXELS pixels, LEN len);
-
-PIXELS_API STATUS dct_pixels(PIXELS pixels, COEFS coefs, LEN len);
-PIXELS_API STATUS idct_pixels(COEFS coefs, PIXELS pixels, LEN len);
 
 PIXELS_API STATUS pixels_insert88(PIXELS pixels);
 PIXELS_API int pixels_extract88(IMAGEDATAS imagedatas);
