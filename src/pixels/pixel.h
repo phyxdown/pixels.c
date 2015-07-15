@@ -13,9 +13,9 @@ typedef unsigned int* PIXELS;
 typedef unsigned int* PIXEL;
 
 struct __pixels_coef {
-	double R;
-	double G;
-	double B;
+	double Y;
+	double U;
+	double V;
 	double A;
 };
 typedef struct __pixels_coef pixels_coef_t;
